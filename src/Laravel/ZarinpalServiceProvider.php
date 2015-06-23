@@ -5,7 +5,7 @@ use Zarinpal\Drivers\NuSoap;
 use Zarinpal\Drivers\Soap;
 use Zarinpal\Zarinpal;
 
-class JavaScriptServiceProvider extends ServiceProvider
+class ZarinpalServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.
