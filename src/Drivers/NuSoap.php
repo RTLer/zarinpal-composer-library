@@ -1,0 +1,43 @@
+<?php namespace Zarinpal\Drivers;
+
+class NuSoap implements SoapDriver
+{
+    /**
+     * request driver
+     *
+     * @param $inputs
+     * @return array
+     */
+    public function requestDriver($inputs)
+    {
+        require_once('lib/nusoap.php');
+        $client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
+        $client->soap_defencoding = 'UTF-8';
+        $result = $client->call('PaymentRequest', [$inputs]);
+        if ($result['Status'] == 100) {
+            Header('Location: https://www.zarinpal.com/pg/StartPay/' . $result->Authority);
+            die;
+        } else {
+            return ['error' => $result['Status']];
+        }
+    }
+
+    /**
+     * verify driver
+     *
+     * @param $inputs
+     * @return array
+     */
+    public function verifyDriver($inputs)
+    {
+        $client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
+        $client->soap_defencoding = 'UTF-8';
+        $result = $client->call('PaymentVerification', [$inputs]);
+
+        if ($result['Status'] == 100) {
+            return ['Status' => 'success', 'RefID' => $result['RefID']];
+        } else {
+            return ['Status' => 'error', 'error' => $result['Status']];
+        }
+    }
+}
