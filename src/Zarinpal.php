@@ -6,6 +6,7 @@ class Zarinpal
 {
     private $merchantID;
     private $driver;
+    private $Authority;
 
     public function __construct($mrchantID, SoapDriver $driver)
     {
@@ -35,7 +36,7 @@ class Zarinpal
         if ($Email) $inputs['Email'] = $Email;
         if ($Mobile) $inputs['Mobile'] = $Mobile;
 
-        return $this->driver->requestDriver($inputs);
+        return $this->Authority = $this->driver->requestDriver($inputs);
     }
 
     /**
@@ -59,5 +60,10 @@ class Zarinpal
         } else {
             return ['Status' => 'canceled'];
         }
+    }
+
+    public function redirect(){
+        Header('Location: https://www.zarinpal.com/pg/StartPay/' . $this->Authority);
+        die;
     }
 }

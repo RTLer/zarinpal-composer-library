@@ -15,8 +15,7 @@ class NuSoap implements SoapDriver
         $client->soap_defencoding = 'UTF-8';
         $result = $client->call('PaymentRequest', [$inputs]);
         if ($result['Status'] == 100) {
-            Header('Location: https://www.zarinpal.com/pg/StartPay/' . $result->Authority);
-            die;
+            return ['Authority' => $result['Authority']];
         } else {
             return ['error' => $result['Status']];
         }
