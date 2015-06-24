@@ -35,8 +35,9 @@ class Zarinpal
         ];
         if ($Email) $inputs['Email'] = $Email;
         if ($Mobile) $inputs['Mobile'] = $Mobile;
-
-        return $this->Authority = $this->driver->requestDriver($inputs);
+		$auth = $this->driver->requestDriver($inputs);
+		$this->Authority = $auth['Authority'];
+        return $this->driver->requestDriver($inputs);
     }
 
     /**
