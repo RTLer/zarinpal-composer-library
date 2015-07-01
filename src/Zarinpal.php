@@ -33,10 +33,14 @@ class Zarinpal
             'Amount' => $Amount,
             'Description' => $Description,
         ];
-        if ($Email) $inputs['Email'] = $Email;
-        if ($Mobile) $inputs['Mobile'] = $Mobile;
-		$auth = $this->driver->requestDriver($inputs);
-		$this->Authority = $auth['Authority'];
+        if ($Email) {
+            $inputs['Email'] = $Email;
+        }
+        if ($Mobile) {
+            $inputs['Mobile'] = $Mobile;
+        }
+        $auth = $this->driver->requestDriver($inputs);
+        $this->Authority = $auth['Authority'];
         return $this->driver->requestDriver($inputs);
     }
 
@@ -63,7 +67,8 @@ class Zarinpal
         }
     }
 
-    public function redirect(){
+    public function redirect()
+    {
         Header('Location: https://www.zarinpal.com/pg/StartPay/' . $this->Authority);
         die;
     }
