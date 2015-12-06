@@ -35,7 +35,7 @@ class ZarinpalServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/Zarinpal.php' => config_path('Zarinpal.phpphp')
+            __DIR__ . '/config/Zarinpal.php' => config_path('Zarinpal.php')
         ]);
     }
 }
