@@ -18,14 +18,14 @@ class Zarinpal
      * send request for mony to zarinpal
      * and dedirect if there was no error
      *
-     * @param $callbackURL
-     * @param $Amount
-     * @param $Description
-     * @param bool $Email
-     * @param bool $Mobile
+     * @param string $callbackURL
+     * @param string $Amount
+     * @param string $Description
+     * @param string $Email
+     * @param string $Mobile
      * @return array|@redirect
      */
-    public function request($callbackURL, $Amount, $Description, $Email = false, $Mobile = false)
+    public function request($callbackURL, $Amount, $Description, $Email = null, $Mobile = null)
     {
         $inputs = [
             'MerchantID' => $this->merchantID,
@@ -33,10 +33,10 @@ class Zarinpal
             'Amount' => $Amount,
             'Description' => $Description,
         ];
-        if ($Email) {
+        if (!empty($Email)) {
             $inputs['Email'] = $Email;
         }
-        if ($Mobile) {
+        if (!empty($Mobile)) {
             $inputs['Mobile'] = $Mobile;
         }
         $auth = $this->driver->requestDriver($inputs);
