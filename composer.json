@@ -5,11 +5,13 @@
     "authors": [
         {
             "name": "hooman naghiee",
-            "email": "hooman@rtler.com"
+            "email": "hooman@zarinpal.com"
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
     "autoload": {
         "psr-4": {
             "Zarinpal\\": "src/"
