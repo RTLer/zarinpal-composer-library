@@ -39,9 +39,9 @@ class Zarinpal
         if (!empty($Mobile)) {
             $inputs['Mobile'] = $Mobile;
         }
-        $auth = $this->driver->requestDriver($inputs);
+        $auth = $this->driver->request($inputs);
         $this->Authority = $auth['Authority'];
-        return $this->driver->requestDriver($inputs);
+        return $auth;
     }
 
     /**
@@ -61,7 +61,7 @@ class Zarinpal
                 'Authority' => $authority,
                 'Amount' => $amount
             );
-            return $this->driver->verifyDriver($inputs);
+            return $this->driver->verify($inputs);
         } else {
             return ['Status' => 'canceled'];
         }
