@@ -1,6 +1,6 @@
 <?php namespace Zarinpal\Drivers;
 
-class NuSoap implements SoapDriver
+class NuSoap implements DriverInterface
 {
     /**
      * request driver
@@ -8,7 +8,7 @@ class NuSoap implements SoapDriver
      * @param $inputs
      * @return array
      */
-    public function requestDriver($inputs)
+    public function request($inputs)
     {
         require_once('lib/nusoap.php');
         $client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
@@ -27,7 +27,7 @@ class NuSoap implements SoapDriver
      * @param $inputs
      * @return array
      */
-    public function verifyDriver($inputs)
+    public function verify($inputs)
     {
         $client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
         $client->soap_defencoding = 'UTF-8';

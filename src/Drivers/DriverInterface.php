@@ -1,16 +1,16 @@
 <?php namespace Zarinpal\Drivers;
 
-interface SoapDriver
+interface DriverInterface
 {
     /**
      * @param $inputs
      * @return array|redirect
      */
-    public function requestDriver($inputs);
+    public function request($inputs);
 
     /**
      * @param $inputs
      * @return array
      */
-    public function verifyDriver($inputs);
+    public function verify($inputs);
 }

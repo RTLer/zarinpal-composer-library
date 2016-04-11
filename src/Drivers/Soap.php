@@ -1,6 +1,6 @@
 <?php namespace Zarinpal\Drivers;
 
-class Soap implements SoapDriver
+class Soap implements DriverInterface
 {
 
     /**
@@ -9,7 +9,7 @@ class Soap implements SoapDriver
      * @param $inputs
      * @return array
      */
-    public function requestDriver($inputs)
+    public function request($inputs)
     {
         $client = new \SoapClient('https://de.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
         $result = $client->PaymentRequest($inputs);
@@ -26,7 +26,7 @@ class Soap implements SoapDriver
      * @param $inputs
      * @return array
      */
-    public function verifyDriver($inputs)
+    public function verify($inputs)
     {
         $client = new \SoapClient('https://de.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
         $result = $client->PaymentVerification($inputs);
