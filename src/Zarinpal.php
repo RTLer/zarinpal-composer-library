@@ -9,24 +9,26 @@ class Zarinpal
     private $Authority;
     private $debug;
 
-    public function __construct($mrchantID, SoapDriver $driver, $debug = false)
+    public function __construct($merchantID, SoapDriver $driver, $debug = false)
     {
-        $this->merchantID = $mrchantID;
+        $this->merchantID = $merchantID;
         $this->driver = $driver;
+
+        $this->debug = $debug;
     }
 
     /**
      * send request for mony to zarinpal
      * and dedirect if there was no error
      *
-     * @param string $callbackURL
-     * @param string $Amount
-     * @param string $Description
-     * @param string $Email
-     * @param string $Mobile
+     * @param $callbackURL
+     * @param $Amount
+     * @param $Description
+     * @param bool $Email
+     * @param bool $Mobile
      * @return array|@redirect
      */
-    public function request($callbackURL, $Amount, $Description, $Email = null, $Mobile = null)
+    public function request($callbackURL, $Amount, $Description, $Email = false, $Mobile = false)
     {
         $inputs = [
             'MerchantID' => $this->merchantID,
@@ -34,15 +36,17 @@ class Zarinpal
             'Amount' => $Amount,
             'Description' => $Description,
         ];
-        if (!empty($Email)) {
+        if ($Email) {
             $inputs['Email'] = $Email;
         }
-        if (!empty($Mobile)) {
+        if ($Mobile) {
             $inputs['Mobile'] = $Mobile;
         }
+
         $auth = $this->driver->requestDriver($inputs, $this->debug);
+
         $this->Authority = $auth['Authority'];
-        return $this->driver->requestDriver($inputs, $this->debug);
+        return $auth;
     }
 
     /**
@@ -68,9 +72,11 @@ class Zarinpal
         }
     }
 
-    public function redirect()
+    public function redirect($debug)
     {
-        Header('Location: https://www.zarinpal.com/pg/StartPay/' . $this->Authority);
+        $url = ($debug) ? 'https://sandbox.zarinpal.com/pg/StartPay/' : 'https://www.zarinpal.com/pg/StartPay/';
+
+        Header($url . $this->Authority);
         die;
     }
 }
