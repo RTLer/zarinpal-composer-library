@@ -76,7 +76,7 @@ class Zarinpal
     {
         $url = ($debug) ? 'https://sandbox.zarinpal.com/pg/StartPay/' : 'https://www.zarinpal.com/pg/StartPay/';
 
-        Header($url . $this->Authority);
+        Header('Location: ' . $url . $this->Authority);
         die;
     }
 }
