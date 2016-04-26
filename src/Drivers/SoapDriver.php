@@ -6,11 +6,11 @@ interface SoapDriver
      * @param $inputs
      * @return array|redirect
      */
-    public function requestDriver($inputs);
+    public function requestDriver($inputs, $debug);
 
     /**
      * @param $inputs
      * @return array
      */
-    public function verifyDriver($inputs);
+    public function verifyDriver($inputs, $debug);
 }
