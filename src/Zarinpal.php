@@ -15,8 +15,8 @@ class Zarinpal
     }
 
     /**
-     * send request for mony to zarinpal
-     * and dedirect if there was no error
+     * send request for money to zarinpal
+     * and redirect if there was no error
      *
      * @param string $callbackURL
      * @param string $Amount
@@ -45,7 +45,7 @@ class Zarinpal
     }
 
     /**
-     * verify that the bill is paied or not
+     * verify that the bill is payed or not
      * by checking authority, amount and status
      *
      * @param $status
