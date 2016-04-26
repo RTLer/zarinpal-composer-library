@@ -7,8 +7,9 @@ class Zarinpal
     private $merchantID;
     private $driver;
     private $Authority;
+    private $debug;
 
-    public function __construct($mrchantID, SoapDriver $driver)
+    public function __construct($mrchantID, SoapDriver $driver, $debug = false)
     {
         $this->merchantID = $mrchantID;
         $this->driver = $driver;
@@ -39,9 +40,9 @@ class Zarinpal
         if (!empty($Mobile)) {
             $inputs['Mobile'] = $Mobile;
         }
-        $auth = $this->driver->requestDriver($inputs);
+        $auth = $this->driver->requestDriver($inputs, $this->debug);
         $this->Authority = $auth['Authority'];
-        return $this->driver->requestDriver($inputs);
+        return $this->driver->requestDriver($inputs, $this->debug);
     }
 
     /**
@@ -61,7 +62,7 @@ class Zarinpal
                 'Authority' => $authority,
                 'Amount' => $amount
             );
-            return $this->driver->verifyDriver($inputs);
+            return $this->driver->verifyDriver($inputs, $this->debug);
         } else {
             return ['Status' => 'canceled'];
         }
