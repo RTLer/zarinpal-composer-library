@@ -7,12 +7,16 @@ class Soap implements SoapDriver
      * request driver
      *
      * @param $inputs
+     * @param bool $debug
      * @return array
      */
-    public function requestDriver($inputs)
+    public function requestDriver($inputs, $debug)
     {
-        $client = new \SoapClient('https://de.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
+        $url = ($debug) ? 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl' : 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
+
+        $client = new \SoapClient($url, array('encoding' => 'UTF-8'));
         $result = $client->PaymentRequest($inputs);
+
         if ($result->Status == 100) {
             return ['Authority' => $result->Authority];
         } else {
@@ -24,11 +28,14 @@ class Soap implements SoapDriver
      * verify driver
      *
      * @param $inputs
+     * @param $debug
      * @return array
      */
-    public function verifyDriver($inputs)
+    public function verifyDriver($inputs, $debug)
     {
-        $client = new \SoapClient('https://de.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
+        $url = ($debug) ? 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl' : 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
+
+        $client = new \SoapClient($url, array('encoding' => 'UTF-8'));
         $result = $client->PaymentVerification($inputs);
 
         if ($result->Status == 100) {

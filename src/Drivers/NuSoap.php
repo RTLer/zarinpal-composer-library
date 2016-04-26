@@ -6,12 +6,16 @@ class NuSoap implements SoapDriver
      * request driver
      *
      * @param $inputs
+     * @param bool $debug
      * @return array
      */
-    public function requestDriver($inputs)
+    public function requestDriver($inputs, $debug)
     {
         require_once('lib/nusoap.php');
-        $client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
+
+        $url = ($debug) ? 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl' : 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
+
+        $client = new nusoap_client($url, 'wsdl');
         $client->soap_defencoding = 'UTF-8';
         $result = $client->call('PaymentRequest', [$inputs]);
         if ($result['Status'] == 100) {
@@ -25,11 +29,14 @@ class NuSoap implements SoapDriver
      * verify driver
      *
      * @param $inputs
+     * @param $debug
      * @return array
      */
-    public function verifyDriver($inputs)
+    public function verifyDriver($inputs, $debug)
     {
-        $client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
+        $url = ($debug) ? 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl' : 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
+
+        $client = new nusoap_client($url, 'wsdl');
         $client->soap_defencoding = 'UTF-8';
         $result = $client->call('PaymentVerification', [$inputs]);
 
