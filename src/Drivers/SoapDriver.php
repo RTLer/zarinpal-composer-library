@@ -23,6 +23,23 @@ class SoapDriver implements DriverInterface
     }
 
     /**
+     * request driver
+     *
+     * @param $inputs
+     * @return array
+     */
+    public function requestWithExtra($inputs)
+    {
+        $client = new \SoapClient($this->wsdlAddress, array('encoding' => 'UTF-8'));
+        $result = $client->PaymentRequestWithExtra($inputs);
+        if ($result->Status == 100) {
+            return ['Authority' => $result->Authority];
+        } else {
+            return ['error' => $result->Status];
+        }
+    }
+
+    /**
      * verify driver
      *
      * @param $inputs
@@ -41,7 +58,26 @@ class SoapDriver implements DriverInterface
     }
 
     /**
+     * verify driver
+     *
+     * @param $inputs
+     * @return array
+     */
+    public function verifyWithExtra($inputs)
+    {
+        $client = new \SoapClient($this->wsdlAddress, array('encoding' => 'UTF-8'));
+        $result = $client->PaymentVerificationWithExtra($inputs);
+
+        if ($result->Status == 100) {
+            return ['Status' => 'success', 'RefID' => $result->RefID];
+        } else {
+            return ['Status' => 'error', 'error' => $result->Status];
+        }
+    }
+
+    /**
      * @param mixed $wsdlAddress
+     * @return void
      */
     public function setAddress($wsdlAddress)
     {

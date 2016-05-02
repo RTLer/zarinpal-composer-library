@@ -21,8 +21,6 @@ class NuSoapDriver implements DriverInterface
     {
         $this->client->soap_defencoding = 'UTF-8';
         $result = $this->client->call('PaymentRequest', [$inputs]);
-        print_r($result);
-        die;
         if ($result['Status'] == 100) {
             return ['Authority' => $result['Authority']];
         } else {
