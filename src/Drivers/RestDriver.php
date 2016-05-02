@@ -5,9 +5,9 @@ namespace Zarinpal\Drivers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
-class Soap implements DriverInterface
+class RestDriver implements DriverInterface
 {
-    protected $baseUri = 'https://www.zarinpal.com/pg/rest/WebGate/';
+    protected $baseUrl = 'https://www.zarinpal.com/pg/rest/WebGate/';
 
     /**
      * request driver.
@@ -28,7 +28,7 @@ class Soap implements DriverInterface
     }
 
     /**
-     * request driver.
+     * requestWithExtra driver.
      *
      * @param $inputs
      *
@@ -64,7 +64,7 @@ class Soap implements DriverInterface
     }
 
     /**
-     * verify driver.
+     * verifyWithExtra driver.
      *
      * @param $inputs
      *
@@ -82,7 +82,7 @@ class Soap implements DriverInterface
     }
 
     /**
-     * verify driver.
+     * unverifiedTransactions driver.
      *
      * @param $inputs
      *
@@ -98,8 +98,9 @@ class Soap implements DriverInterface
             return ['Status' => 'error', 'error' => $result['Status']];
         }
     }
+
     /**
-     * verify driver.
+     * refreshAuthority driver.
      *
      * @param $inputs
      *
@@ -116,23 +117,38 @@ class Soap implements DriverInterface
         }
     }
 
+    /**
+     * request rest and return the response
+     *
+     * @param $uri
+     * @param $data
+     * @return mixed
+     */
     private function restCall($uri, $data)
     {
         try {
-            $client = new Client(['base_uri' => $this->baseUri]);
-            $request = $client->request('POST', $uri, ['json' => $data]);
+            $client = new Client(['base_uri' => $this->baseUrl]);
+            $response = $client->request('POST', $uri, ['json' => $data]);
 
-            $rawBody = $this->response->getBody()->getContents();
-            $body = json_decode($this->rawBody);
+            $rawBody = $response->getBody()->getContents();
+            $body = json_decode($rawBody, true);
         } catch (RequestException $e) {
             $response = $e->getResponse();
-            $rawBody = is_null($this->response) ? '{}' : $this->response->getBody()->getContents();
-            $body = json_decode($this->rawBody);
+            $rawBody = is_null($response) ? '{"Status":-98}' : $response->getBody()->getContents();
+            $body = json_decode($rawBody, true);
         }
 
-        if(!isset($result['Status'])){
-          $result['Status'] = -99;
+        if (!isset($result['Status'])) {
+            $result['Status'] = -99;
         }
         return $body;
+    }
+
+    /**
+     * @param mixed $baseUrl
+     */
+    public function setAddress($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
     }
 }

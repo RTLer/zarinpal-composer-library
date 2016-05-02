@@ -1,7 +1,9 @@
 <?php namespace Zarinpal\Drivers;
 
-class Soap implements DriverInterface
+class SoapDriver implements DriverInterface
 {
+
+    private $wsdlAddress = 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
 
     /**
      * request driver
@@ -11,7 +13,7 @@ class Soap implements DriverInterface
      */
     public function request($inputs)
     {
-        $client = new \SoapClient('https://de.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
+        $client = new \SoapClient($this->wsdlAddress, array('encoding' => 'UTF-8'));
         $result = $client->PaymentRequest($inputs);
         if ($result->Status == 100) {
             return ['Authority' => $result->Authority];
@@ -28,7 +30,7 @@ class Soap implements DriverInterface
      */
     public function verify($inputs)
     {
-        $client = new \SoapClient('https://de.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
+        $client = new \SoapClient($this->wsdlAddress, array('encoding' => 'UTF-8'));
         $result = $client->PaymentVerification($inputs);
 
         if ($result->Status == 100) {
@@ -36,5 +38,13 @@ class Soap implements DriverInterface
         } else {
             return ['Status' => 'error', 'error' => $result->Status];
         }
+    }
+
+    /**
+     * @param mixed $wsdlAddress
+     */
+    public function setAddress($wsdlAddress)
+    {
+        $this->wsdlAddress = $wsdlAddress;
     }
 }
