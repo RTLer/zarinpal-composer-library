@@ -15,7 +15,7 @@ class ZarinpalServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('Zarinpal', function () {
-            $mrchantID = config('Zarinpal.mrchantID', 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
+            $merchantID = config('Zarinpal.merchantID', 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
             $driver = config('Zarinpal.Soap', 'Soap');
             switch ($driver) {
                 case 'Soap':
@@ -25,7 +25,7 @@ class ZarinpalServiceProvider extends ServiceProvider
                     $driver = new NuSoap();
                     break;
             }
-            return new Zarinpal($mrchantID, $driver);
+            return new Zarinpal($merchantID, $driver);
         });
     }
 
