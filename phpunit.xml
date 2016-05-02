@@ -1,0 +1,9 @@
+<phpunit bootstrap="src/autoload.php">
+    <testsuites>
+        <testsuite name="sandboxTest">
+            <file>tests/RestTestCase.php</file>
+            <file>tests/SoapTestCase.php</file>
+            <file>tests/NuSoapTestCase.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
