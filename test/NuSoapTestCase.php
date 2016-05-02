@@ -10,8 +10,8 @@ class NuSoapTestCase extends PHPUnit_Framework_TestCase
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         $restDriver = new NuSoapDriver();
-        $restDriver->setAddress('https://sandbox.zarinpal.com/pg/rest/WebGate/');
         $this->zarinpal = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', $restDriver);
+        $this->zarinpal->getDriver()->setAddress('https://sandbox.zarinpal.com/pg/rest/WebGate/');
 
         parent::__construct($name, $data, $dataName);
     }
