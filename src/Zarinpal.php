@@ -1,6 +1,6 @@
 <?php namespace Zarinpal;
 
-use Zarinpal\Drivers\SoapDriver;
+use Zarinpal\Drivers\DriverInterface;
 
 class Zarinpal
 {
@@ -8,15 +8,15 @@ class Zarinpal
     private $driver;
     private $Authority;
 
-    public function __construct($mrchantID, SoapDriver $driver)
+    public function __construct($merchantID, DriverInterface $driver)
     {
-        $this->merchantID = $mrchantID;
+        $this->merchantID = $merchantID;
         $this->driver = $driver;
     }
 
     /**
-     * send request for mony to zarinpal
-     * and dedirect if there was no error
+     * send request for money to zarinpal
+     * and redirect if there was no error
      *
      * @param string $callbackURL
      * @param string $Amount
@@ -45,7 +45,7 @@ class Zarinpal
     }
 
     /**
-     * verify that the bill is paied or not
+     * verify that the bill is paid or not
      * by checking authority, amount and status
      *
      * @param $status
@@ -55,7 +55,7 @@ class Zarinpal
      */
     public function verify($status, $amount, $authority)
     {
-        if (isset($status) && $status == 'OK') {
+        if ($status == 'OK') {
             $inputs = array(
                 'MerchantID' => $this->merchantID,
                 'Authority' => $authority,
@@ -69,7 +69,7 @@ class Zarinpal
 
     public function redirect()
     {
-        Header('Location: https://www.zarinpal.com/pg/StartPay/' . $this->Authority);
+        header('Location: https://www.zarinpal.com/pg/StartPay/' . $this->Authority);
         die;
     }
 }
