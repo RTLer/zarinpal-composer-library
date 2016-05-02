@@ -46,7 +46,9 @@ class Zarinpal
             $inputs['Mobile'] = $Mobile;
         }
         $auth = $this->driver->request($inputs);
-        print_r($auth);die;
+        if(empty($auth['Authority'])){
+            $auth['Authority'] = null;
+        }
         $this->Authority = $auth['Authority'];
         return $auth;
     }

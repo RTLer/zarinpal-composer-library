@@ -11,7 +11,7 @@ class SoapTestCase extends PHPUnit_Framework_TestCase
     {
         $restDriver = new SoapDriver();
         $this->zarinpal = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', $restDriver);
-        $this->zarinpal->getDriver()->setAddress('https://sandbox.zarinpal.com/pg/rest/WebGate/');
+        $this->zarinpal->getDriver()->setAddress('https://www.zarinpal.com/pg/services/WebGate/wsdl');
 
         parent::__construct($name, $data, $dataName);
     }
