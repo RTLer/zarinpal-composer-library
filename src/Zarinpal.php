@@ -1,6 +1,7 @@
 <?php namespace Zarinpal;
 
 use Zarinpal\Drivers\DriverInterface;
+use Zarinpal\Drivers\RestDriver;
 
 class Zarinpal
 {
@@ -8,8 +9,13 @@ class Zarinpal
     private $driver;
     private $Authority;
 
-    public function __construct($merchantID, DriverInterface $driver)
+    public function __construct($merchantID, DriverInterface $driver = null)
     {
+        if(is_null($driver)){
+            $driver = new RestDriver();
+            $driver->setAddress('https://sandbox.zarinpal.com/pg/rest/WebGate/');
+
+        }
         $this->merchantID = $merchantID;
         $this->driver = $driver;
     }
@@ -40,6 +46,7 @@ class Zarinpal
             $inputs['Mobile'] = $Mobile;
         }
         $auth = $this->driver->request($inputs);
+        print_r($auth);die;
         $this->Authority = $auth['Authority'];
         return $auth;
     }
@@ -71,5 +78,13 @@ class Zarinpal
     {
         header('Location: https://www.zarinpal.com/pg/StartPay/' . $this->Authority);
         die;
+    }
+
+    /**
+     * @return DriverInterface
+     */
+    public function getDriver()
+    {
+        return $this->driver;
     }
 }
