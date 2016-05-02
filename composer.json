@@ -12,7 +12,13 @@
     "require": {
         "guzzlehttp/guzzle": "^6.2"
     },
+    "require-dev": {
+        "phpunit/phpunit": "5.3.*"
+    },
     "autoload": {
+        "classmap": [
+            "src/Drivers/lib/nusoap.php"
+        ],
         "psr-4": {
             "Zarinpal\\": "src/"
         }
