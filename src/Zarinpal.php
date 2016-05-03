@@ -1,6 +1,7 @@
 <?php namespace Zarinpal;
 
-use Zarinpal\Drivers\SoapDriver;
+use Zarinpal\Drivers\DriverInterface;
+use Zarinpal\Drivers\RestDriver;
 
 class Zarinpal
 {
@@ -8,9 +9,14 @@ class Zarinpal
     private $driver;
     private $Authority;
 
-    public function __construct($mrchantID, SoapDriver $driver)
+    public function __construct($merchantID, DriverInterface $driver = null)
     {
-        $this->merchantID = $mrchantID;
+        if(is_null($driver)){
+            $driver = new RestDriver();
+            $driver->setAddress('https://sandbox.zarinpal.com/pg/rest/WebGate/');
+
+        }
+        $this->merchantID = $merchantID;
         $this->driver = $driver;
     }
 
@@ -39,13 +45,16 @@ class Zarinpal
         if (!empty($Mobile)) {
             $inputs['Mobile'] = $Mobile;
         }
-        $auth = $this->driver->requestDriver($inputs);
+        $auth = $this->driver->request($inputs);
+        if(empty($auth['Authority'])){
+            $auth['Authority'] = null;
+        }
         $this->Authority = $auth['Authority'];
-        return $this->driver->requestDriver($inputs);
+        return $auth;
     }
 
     /**
-     * verify that the bill is payed or not
+     * verify that the bill is paid or not
      * by checking authority, amount and status
      *
      * @param $status
@@ -55,13 +64,13 @@ class Zarinpal
      */
     public function verify($status, $amount, $authority)
     {
-        if (isset($status) && $status == 'OK') {
+        if ($status == 'OK') {
             $inputs = array(
                 'MerchantID' => $this->merchantID,
                 'Authority' => $authority,
                 'Amount' => $amount
             );
-            return $this->driver->verifyDriver($inputs);
+            return $this->driver->verify($inputs);
         } else {
             return ['Status' => 'canceled'];
         }
@@ -69,7 +78,15 @@ class Zarinpal
 
     public function redirect()
     {
-        Header('Location: https://www.zarinpal.com/pg/StartPay/' . $this->Authority);
+        header('Location: https://www.zarinpal.com/pg/StartPay/' . $this->Authority);
         die;
+    }
+
+    /**
+     * @return DriverInterface
+     */
+    public function getDriver()
+    {
+        return $this->driver;
     }
 }

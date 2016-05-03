@@ -2,7 +2,10 @@
 
 use Illuminate\Support\ServiceProvider;
 use Zarinpal\Drivers\NuSoap;
+use Zarinpal\Drivers\NuSoapDriver;
+use Zarinpal\Drivers\RestDriver;
 use Zarinpal\Drivers\Soap;
+use Zarinpal\Drivers\SoapDriver;
 use Zarinpal\Zarinpal;
 
 class ZarinpalServiceProvider extends ServiceProvider
@@ -14,19 +17,23 @@ class ZarinpalServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('Zarinpal', function () {
-            $mrchantID = config('Zarinpal.mrchantID', 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
+        $this->app->singleton('Zarinpal', function () {
+            $merchantID = config('Zarinpal.merchantID', 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
             $driver = config('Zarinpal.Soap', 'Soap');
             switch ($driver) {
                 case 'Soap':
-                    $driver = new Soap();
+                    $driver = new SoapDriver();
                     break;
                 case 'NuSoap':
-                    $driver = new NuSoap();
+                    $driver = new NuSoapDriver();
+                    break;
+                case 'Rest':
+                    $driver = new RestDriver();
                     break;
             }
-            return new Zarinpal($mrchantID, $driver);
+            return new Zarinpal($merchantID, $driver);
         });
+
     }
 
     /**

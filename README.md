@@ -1,4 +1,4 @@
-# zarinpal-composer-library
+# zarinpal-composer-library [![Build Status](https://travis-ci.org/RTLer/zarinpal-composer-library.svg?branch=zarinpal-new-rest-api)](https://travis-ci.org/RTLer/zarinpal-composer-library)
 transaction request library for zarinpal
 
 ##laravel ready
@@ -11,8 +11,14 @@ just add :
     ...
 )
 ```
-to providers list in "config/app.php".
-
+to providers list in "config/app.php". and run
+'`php artisan vendor:publish --provider="Zarinpal\Laravel\ZarinpalServiceProvider"`'
+to add config file to laravel configs directory config it and you are good to go
+now you can access the zarinpal lib like this:
+```php
+Zarinpal::request("example.com/testVerify.php",1000,'testing');
+Zarinpal::verify('OK',1000,$answer['Authority']);
+```
 ##usage
 
 ###request
@@ -41,13 +47,21 @@ echo json_encode($test->verify('OK',1000,$answer['Authority']));
 //'Status'(index) going to be 'success', 'error' or 'canceled'
 ```
 ##change driver
-driver can be changed between soap and NuSoap with using:
+driver can be changed between restAPI , soap and NuSoap with using:
+
+restAPI (recommended):
+```php
+$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
+```
+or soap:
 ```php
 use Zarinpal\Drivers\Soap;
 $test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new soap());
 ```
-or:
+or nuSoap:
 ```php
 use Zarinpal\Drivers\NuSoap;
 $test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new NuSoap());
 ```
+
+
