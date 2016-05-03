@@ -125,6 +125,7 @@ class NuSoapDriver implements DriverInterface
     public function setAddress($wsdlAddress)
     {
         $this->wsdlAddress = $wsdlAddress;
+        $this->client = new \nusoap_client($this->wsdlAddress, 'wsdl');
     }
 
 }

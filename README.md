@@ -1,4 +1,4 @@
-# zarinpal-composer-library
+# zarinpal-composer-library [![Build Status](https://travis-ci.org/RTLer/zarinpal-composer-library.svg?branch=zarinpal-new-rest-api)](https://travis-ci.org/RTLer/zarinpal-composer-library)
 transaction request library for zarinpal
 
 ##laravel ready
