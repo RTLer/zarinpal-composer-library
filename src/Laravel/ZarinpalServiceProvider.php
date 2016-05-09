@@ -19,7 +19,7 @@ class ZarinpalServiceProvider extends ServiceProvider
     {
         $this->app->singleton('Zarinpal', function () {
             $merchantID = config('Zarinpal.merchantID', 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
-            $driver = config('Zarinpal.Soap', 'Soap');
+            $driver = config('Zarinpal.Soap', 'Rest');
             switch ($driver) {
                 case 'Soap':
                     $driver = new SoapDriver();
@@ -27,7 +27,7 @@ class ZarinpalServiceProvider extends ServiceProvider
                 case 'NuSoap':
                     $driver = new NuSoapDriver();
                     break;
-                case 'Rest':
+                default:
                     $driver = new RestDriver();
                     break;
             }
