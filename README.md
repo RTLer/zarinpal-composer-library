@@ -19,7 +19,19 @@ now you can access the zarinpal lib like this:
 Zarinpal::request("example.com/testVerify.php",1000,'testing');
 Zarinpal::verify('OK',1000,$answer['Authority']);
 ```
+
+
 ##usage
+###installation 
+``composer require zarinpal/zarinpal``
+or
+```json
+"require": {
+    ...
+    "zarinpal/zarinpal" : "1.*",
+    ...
+},
+```
 
 ###request
 ```php
