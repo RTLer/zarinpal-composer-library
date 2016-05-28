@@ -1,4 +1,6 @@
-<?php namespace Zarinpal\Laravel;
+<?php
+
+namespace Zarinpal\Laravel;
 
 use Illuminate\Support\ServiceProvider;
 use Zarinpal\Drivers\NuSoap;
@@ -31,9 +33,9 @@ class ZarinpalServiceProvider extends ServiceProvider
                     $driver = new RestDriver();
                     break;
             }
+
             return new Zarinpal($merchantID, $driver);
         });
-
     }
 
     /**
@@ -42,7 +44,7 @@ class ZarinpalServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/Zarinpal.php' => config_path('Zarinpal.php')
+            __DIR__.'/config/Zarinpal.php' => config_path('Zarinpal.php'),
         ]);
     }
 }
