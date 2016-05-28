@@ -1,4 +1,6 @@
-<?php namespace Zarinpal\Drivers;
+<?php
+
+namespace Zarinpal\Drivers;
 
 class NuSoapDriver implements DriverInterface
 {
@@ -7,14 +9,15 @@ class NuSoapDriver implements DriverInterface
 
     public function __construct()
     {
-//        require_once('./lib/nusoap.php');
+        //        require_once('./lib/nusoap.php');
         $this->client = new \nusoap_client($this->wsdlAddress, 'wsdl');
     }
 
     /**
-     * request driver
+     * request driver.
      *
      * @param $inputs
+     *
      * @return array
      */
     public function request($inputs)
@@ -47,9 +50,10 @@ class NuSoapDriver implements DriverInterface
     }
 
     /**
-     * verify driver
+     * verify driver.
      *
      * @param $inputs
+     *
      * @return array
      */
     public function verify($inputs)
@@ -98,7 +102,6 @@ class NuSoapDriver implements DriverInterface
         } else {
             return ['error' => $result['Status']];
         }
-
     }
 
     /**
@@ -127,5 +130,4 @@ class NuSoapDriver implements DriverInterface
         $this->wsdlAddress = $wsdlAddress;
         $this->client = new \nusoap_client($this->wsdlAddress, 'wsdl');
     }
-
 }

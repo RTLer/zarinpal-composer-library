@@ -118,10 +118,11 @@ class RestDriver implements DriverInterface
     }
 
     /**
-     * request rest and return the response
+     * request rest and return the response.
      *
      * @param $uri
      * @param $data
+     *
      * @return mixed
      */
     private function restCall($uri, $data)
@@ -141,6 +142,7 @@ class RestDriver implements DriverInterface
         if (!isset($result['Status'])) {
             $result['Status'] = -99;
         }
+
         return $body;
     }
 
