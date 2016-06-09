@@ -8,7 +8,7 @@ just add :
 ```php
 'providers' => array(
     ...
-    'Zarinpal\Laravel\ZarinpalServiceProvider'
+    Zarinpal\Laravel\ZarinpalServiceProvider::class
     ...
 )
 ```
