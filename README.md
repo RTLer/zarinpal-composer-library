@@ -17,6 +17,8 @@ to providers list in "config/app.php". and run
 to add config file to laravel configs directory config it and you are good to go
 now you can access the zarinpal lib like this:
 ```php
+use Zarinpal\Laravel\Facade\Zarinpal;
+
 Zarinpal::request("example.com/testVerify.php",1000,'testing');
 Zarinpal::verify('OK',1000,$answer['Authority']);
 ```
@@ -68,13 +70,13 @@ $test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
 ```
 or soap:
 ```php
-use Zarinpal\Drivers\Soap;
-$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new soap());
+use Zarinpal\Drivers\SoapDriver;
+$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new soapDriver());
 ```
 or nuSoap:
 ```php
-use Zarinpal\Drivers\NuSoap;
-$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new NuSoap());
+use Zarinpal\Drivers\NuSoapDriver;
+$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new NuSoapDriver());
 ```
 
 
