@@ -38,10 +38,9 @@ or
 
 ###request
 ```php
-use Zarinpal\Drivers\Soap;
 use Zarinpal\Zarinpal;
 
-$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new soap());
+$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
 echo json_encode($answer = $test->request("example.com/testVerify.php",1000,'testing'));
 if(isset($answer['Authority'])) {
     file_put_contents('Authority',$answer['Authority']);
@@ -53,10 +52,9 @@ if(isset($answer['Authority'])) {
 
 ###verify
 ```php
-use Zarinpal\Drivers\Soap;
 use Zarinpal\Zarinpal;
 
-$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new soap());
+$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
 $answer['Authority'] = file_get_contents('Authority');
 echo json_encode($test->verify('OK',1000,$answer['Authority']));
 //'Status'(index) going to be 'success', 'error' or 'canceled'
