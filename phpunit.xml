@@ -1,4 +1,4 @@
-<phpunit bootstrap="./vendor/autoload.php">
+<phpunit bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="sandboxTest">
             <file>./test/RestTestCase.php</file>
@@ -6,4 +6,13 @@
             <file>./test/NuSoapTestCase.php</file>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+            <exclude>
+                <directory suffix=".php">src/Drivers/lib</directory>
+                <directory suffix=".php">src/Laravel</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>
