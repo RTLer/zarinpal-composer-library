@@ -15,7 +15,7 @@ class Zarinpal
     {
         if (is_null($driver)) {
             $driver = new RestDriver();
-            $driver->setAddress('https://sandbox.zarinpal.com/pg/rest/WebGate/');
+            $driver->setAddress('https://www.zarinpal.com/pg/rest/WebGate/');
         }
         $this->merchantID = $merchantID;
         $this->driver = $driver;
