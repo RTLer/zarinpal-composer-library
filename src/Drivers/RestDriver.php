@@ -135,7 +135,7 @@ class RestDriver implements DriverInterface
             $body = json_decode($rawBody, true);
         } catch (RequestException $e) {
             $response = $e->getResponse();
-            $rawBody = is_null($response) ? '{"Status":-98}' : $response->getBody()->getContents();
+            $rawBody = is_null($response) ? '{"Status":-98,"message":"http connection error"}' : $response->getBody()->getContents();
             $body = json_decode($rawBody, true);
         }
 
@@ -148,6 +148,7 @@ class RestDriver implements DriverInterface
 
     /**
      * @param mixed $baseUrl
+     * @return void
      */
     public function setAddress($baseUrl)
     {
