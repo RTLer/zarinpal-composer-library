@@ -15,7 +15,7 @@ just add :
     Zarinpal\Laravel\ZarinpalServiceProvider::class
     ...
 )
-```
+``` 
 to providers list in "config/app.php". and run
 '`php artisan vendor:publish --provider="Zarinpal\Laravel\ZarinpalServiceProvider"`'
 to add config file to laravel configs directory config it and you are good to go
