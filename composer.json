@@ -10,17 +10,14 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "deviservi/nusoap": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "5.3.*",
         "satooshi/php-coveralls": "^1.0"
-
     },
     "autoload": {
-        "classmap": [
-            "src/Drivers/lib/nusoap.php"
-        ],
         "psr-4": {
             "Zarinpal\\": "src/"
         }
