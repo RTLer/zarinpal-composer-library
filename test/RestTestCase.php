@@ -3,7 +3,7 @@
 use GuzzleHttp\Client;
 use Zarinpal\Zarinpal;
 
-class RestTestCase extends PHPUnit_Framework_TestCase
+class RestTestCase extends \PHPUnit\Framework\TestCase
 {
     private $zarinpal;
 

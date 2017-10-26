@@ -2,8 +2,6 @@
     <testsuites>
         <testsuite name="sandboxTest">
             <file>./test/RestTestCase.php</file>
-            <file>./test/SoapTestCase.php</file>
-            <file>./test/NuSoapTestCase.php</file>
         </testsuite>
     </testsuites>
     <filter>

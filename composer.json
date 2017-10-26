@@ -10,11 +10,10 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "guzzlehttp/guzzle": "^6.2",
-        "deviservi/nusoap": "^1.1"
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "5.3.*",
+        "phpunit/phpunit": "6.3.*",
         "satooshi/php-coveralls": "^1.0"
     },
     "autoload": {
