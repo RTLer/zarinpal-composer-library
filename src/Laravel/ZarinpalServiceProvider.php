@@ -20,8 +20,8 @@ class ZarinpalServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('Zarinpal', function () {
-            $merchantID = config('Zarinpal.merchantID', 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
-            $driver = config('Zarinpal.driver', 'Rest');
+            $merchantID = config('services.zarinpal.merchantID', config('Zarinpal.merchantID', 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'));
+            $driver = config('services.zarinpal.driver', config('Zarinpal.driver', 'Rest'));
             switch ($driver) {
                 case 'Soap':
                     $driver = new SoapDriver();
@@ -43,8 +43,6 @@ class ZarinpalServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__.'/config/Zarinpal.php' => config_path('Zarinpal.php'),
-        ]);
+        //
     }
 }

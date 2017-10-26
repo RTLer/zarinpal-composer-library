@@ -6,19 +6,24 @@
 
 transaction request library for zarinpal
 
-##laravel ready
+## laravel ready
 this package is going to work with all kinds of projects, but for laravel i add provider to make it as easy as possible.
 just add :
 ```php
-'providers' => array(
+'providers' => [
     ...
     Zarinpal\Laravel\ZarinpalServiceProvider::class
     ...
-)
+]
 ``` 
-to providers list in "config/app.php". and run
-'`php artisan vendor:publish --provider="Zarinpal\Laravel\ZarinpalServiceProvider"`'
-to add config file to laravel configs directory config it and you are good to go
+to providers list in "config/app.php". then add this to `config/services.php`
+```php
+'zarinpal' => [
+    'merchantID' => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+    'driver' => 'Rest',
+],
+```
+and you are good to go (legacy config still works)
 now you can access the zarinpal lib like this:
 ```php
 use Zarinpal\Laravel\Facade\Zarinpal;
@@ -28,8 +33,8 @@ Zarinpal::verify('OK',1000,$answer['Authority']);
 ```
 
 
-##usage
-###installation 
+## usage
+### installation
 ``composer require zarinpal/zarinpal``
 or
 ```json
@@ -40,7 +45,7 @@ or
 },
 ```
 
-###request
+### request
 ```php
 use Zarinpal\Zarinpal;
 
@@ -54,7 +59,7 @@ if(isset($answer['Authority'])) {
 //$answer['Authority'] must save somewhere to do the verification  
 ```
 
-###verify
+### verify
 ```php
 use Zarinpal\Zarinpal;
 
@@ -63,22 +68,3 @@ $answer['Authority'] = file_get_contents('Authority');
 echo json_encode($test->verify('OK',1000,$answer['Authority']));
 //'Status'(index) going to be 'success', 'error' or 'canceled'
 ```
-##change driver
-driver can be changed between restAPI , soap and NuSoap with using:
-
-restAPI (recommended):
-```php
-$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
-```
-or soap:
-```php
-use Zarinpal\Drivers\SoapDriver;
-$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new soapDriver());
-```
-or nuSoap:
-```php
-use Zarinpal\Drivers\NuSoapDriver;
-$test = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',new NuSoapDriver());
-```
-
-
