@@ -40,7 +40,7 @@ or
 ```json
 "require": {
     ...
-    "zarinpal/zarinpal" : "1.*",
+    "zarinpal/zarinpal" : "1.2.*",
     ...
 },
 ```
