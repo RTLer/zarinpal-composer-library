@@ -6,33 +6,6 @@
 
 transaction request library for zarinpal
 
-## laravel ready
-this package is going to work with all kinds of projects, but for laravel i add provider to make it as easy as possible.
-just add **(if you are using laravel 5.5 or higher skip this one)**:
-```php
-'providers' => [
-    ...
-    Zarinpal\Laravel\ZarinpalServiceProvider::class
-    ...
-]
-``` 
-to providers list in "config/app.php". then add this to `config/services.php`
-```php
-'zarinpal' => [
-    'merchantID' => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-    'driver' => 'Rest',
-],
-```
-and you are good to go (legacy config still works)
-now you can access the zarinpal lib like this:
-```php
-use Zarinpal\Laravel\Facade\Zarinpal;
-
-Zarinpal::request("example.com/testVerify.php",1000,'testing');
-Zarinpal::verify('OK',1000,$answer['Authority']);
-```
-
-
 ## usage
 ### installation
 ``composer require zarinpal/zarinpal``
@@ -68,3 +41,30 @@ $answer['Authority'] = file_get_contents('Authority');
 echo json_encode($test->verify('OK',1000,$answer['Authority']));
 //'Status'(index) going to be 'success', 'error' or 'canceled'
 ```
+
+## laravel ready
+this package is going to work with all kinds of projects, but for laravel i add provider to make it as easy as possible.
+just add **(if you are using laravel 5.5 or higher skip this one)**:
+```php
+'providers' => [
+    ...
+    Zarinpal\Laravel\ZarinpalServiceProvider::class
+    ...
+]
+``` 
+to providers list in "config/app.php". then add this to `config/services.php`
+```php
+'zarinpal' => [
+    'merchantID' => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+    'driver' => 'Rest',
+],
+```
+and you are good to go (legacy config still works)
+now you can access the zarinpal lib like this:
+```php
+use Zarinpal\Laravel\Facade\Zarinpal;
+
+Zarinpal::request("example.com/testVerify.php",1000,'testing');
+Zarinpal::verify('OK',1000,$answer['Authority']);
+```
+
