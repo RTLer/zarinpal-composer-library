@@ -20,5 +20,15 @@
         "psr-4": {
             "Zarinpal\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zarinpal\\Laravel\\ZarinpalServiceProvider"
+            ],
+            "aliases": {
+                "Zarinpal": "Zarinpal\\Laravel\\Facade\\Zarinpal"
+            }
+        }
     }
 }
