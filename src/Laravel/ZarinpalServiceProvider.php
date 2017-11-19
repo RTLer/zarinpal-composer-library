@@ -25,7 +25,7 @@ class ZarinpalServiceProvider extends ServiceProvider
 
             $zarinpal = new Zarinpal($merchantID, $this->app->make(DriverInterface::class));
 
-            if(config('services.zarinpal.sandbox',false)){
+            if (config('services.zarinpal.sandbox', false)) {
                 $zarinpal->enableSandbox();
             }
 
