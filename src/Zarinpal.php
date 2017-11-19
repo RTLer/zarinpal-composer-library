@@ -7,6 +7,7 @@ use Zarinpal\Drivers\RestDriver;
 
 class Zarinpal
 {
+    private $redirectUrl = 'https://www.zarinpal.com/pg/StartPay/';
     private $merchantID;
     private $driver;
     private $Authority;
@@ -35,9 +36,9 @@ class Zarinpal
     public function request($callbackURL, $Amount, $Description, $Email = null, $Mobile = null)
     {
         $inputs = [
-            'MerchantID'  => $this->merchantID,
+            'MerchantID' => $this->merchantID,
             'CallbackURL' => $callbackURL,
-            'Amount'      => $Amount,
+            'Amount' => $Amount,
             'Description' => $Description,
         ];
         if (!empty($Email)) {
@@ -70,8 +71,8 @@ class Zarinpal
         if ($status == 'OK') {
             $inputs = [
                 'MerchantID' => $this->merchantID,
-                'Authority'  => $authority,
-                'Amount'     => $amount,
+                'Authority' => $authority,
+                'Amount' => $amount,
             ];
 
             return $this->driver->verify($inputs);
@@ -82,7 +83,7 @@ class Zarinpal
 
     public function redirect()
     {
-        header('Location: https://www.zarinpal.com/pg/StartPay/'.$this->Authority);
+        header('Location: ' . $this->redirectUrl . $this->Authority);
         die;
     }
 
@@ -96,6 +97,7 @@ class Zarinpal
 
     public function enableSandbox()
     {
-        return $this->getDriver()->enableSandbox();
+        $this->redirectUrl = 'https://sandbox.zarinpal.com/pg/StartPay/';
+        $this->getDriver()->enableSandbox();
     }
 }
