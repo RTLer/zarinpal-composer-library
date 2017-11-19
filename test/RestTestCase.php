@@ -10,7 +10,7 @@ class RestTestCase extends \PHPUnit\Framework\TestCase
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->zarinpal = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
-        $this->zarinpal->getDriver()->setAddress('https://sandbox.zarinpal.com/pg/rest/WebGate/');
+        $this->zarinpal->enableSandbox();
 
         parent::__construct($name, $data, $dataName);
     }

@@ -93,4 +93,11 @@ class Zarinpal
     {
         return $this->driver;
     }
+
+    /**
+     */
+    public function enableSandbox()
+    {
+        return $this->getDriver()->enableSandbox();
+    }
 }

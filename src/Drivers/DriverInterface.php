@@ -38,4 +38,9 @@ interface DriverInterface
      * @return array
      */
     public function setAddress($inputs);
+
+    /**
+     * activate sandbox mod for dev environment
+     */
+    public function enableSandbox();
 }

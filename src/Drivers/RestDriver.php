@@ -155,4 +155,9 @@ class RestDriver implements DriverInterface
     {
         $this->baseUrl = $baseUrl;
     }
+
+    public function enableSandbox()
+    {
+        $this->setAddress('https://sandbox.zarinpal.com/pg/rest/WebGate/');
+    }
 }
