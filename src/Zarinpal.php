@@ -36,9 +36,9 @@ class Zarinpal
     public function request($callbackURL, $Amount, $Description, $Email = null, $Mobile = null)
     {
         $inputs = [
-            'MerchantID' => $this->merchantID,
+            'MerchantID'  => $this->merchantID,
             'CallbackURL' => $callbackURL,
-            'Amount' => $Amount,
+            'Amount'      => $Amount,
             'Description' => $Description,
         ];
         if (!empty($Email)) {
@@ -71,8 +71,8 @@ class Zarinpal
         if ($status == 'OK') {
             $inputs = [
                 'MerchantID' => $this->merchantID,
-                'Authority' => $authority,
-                'Amount' => $amount,
+                'Authority'  => $authority,
+                'Amount'     => $amount,
             ];
 
             return $this->driver->verify($inputs);
@@ -83,7 +83,7 @@ class Zarinpal
 
     public function redirect()
     {
-        header('Location: ' . $this->redirectUrl . $this->Authority);
+        header('Location: '.$this->redirectUrl.$this->Authority);
         die;
     }
 
