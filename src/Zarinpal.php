@@ -7,7 +7,7 @@ use Zarinpal\Drivers\RestDriver;
 
 class Zarinpal
 {
-    private $redirectUrl = 'https://www.zarinpal.com/pg/StartPay/';
+    private $redirectUrl = "https://www.zarinpal.com/pg/StartPay/%u";
     private $merchantID;
     private $driver;
     private $Authority;
@@ -83,7 +83,11 @@ class Zarinpal
 
     public function redirect()
     {
+<<<<<<< Updated upstream
         header('Location: '.$this->redirectUrl.$this->Authority);
+=======
+        header('Location: ' . sprintf($this->redirectUrl, $this->Authority));
+>>>>>>> Stashed changes
         die;
     }
 
@@ -95,9 +99,20 @@ class Zarinpal
         return $this->driver;
     }
 
+    /**
+     * active sandbox mod for test env
+     */
     public function enableSandbox()
     {
-        $this->redirectUrl = 'https://sandbox.zarinpal.com/pg/StartPay/';
+        $this->redirectUrl = "https://sandbox.zarinpal.com/pg/StartPay/%u";
         $this->getDriver()->enableSandbox();
+    }
+
+    /**
+     * active zarinGate mode
+     */
+    public function isZarinGate()
+    {
+        $this->redirectUrl = $this->redirectUrl."/ZarinGate";
     }
 }

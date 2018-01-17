@@ -28,6 +28,9 @@ class ZarinpalServiceProvider extends ServiceProvider
             if (config('services.zarinpal.sandbox', false)) {
                 $zarinpal->enableSandbox();
             }
+            if (config('services.zarinpal.zarinGate', false)) {
+                $zarinpal->isZarinGate();
+            }
 
             return $zarinpal;
         });
