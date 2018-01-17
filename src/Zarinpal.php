@@ -83,11 +83,7 @@ class Zarinpal
 
     public function redirect()
     {
-<<<<<<< Updated upstream
-        header('Location: '.$this->redirectUrl.$this->Authority);
-=======
         header('Location: ' . sprintf($this->redirectUrl, $this->Authority));
->>>>>>> Stashed changes
         die;
     }
 
