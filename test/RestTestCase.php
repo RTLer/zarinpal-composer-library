@@ -34,7 +34,7 @@ class RestTestCase extends \PHPUnit\Framework\TestCase
         } catch (Exception $e) {
         }
 
-        $answer = $this->zarinpal->verify('OK', 1000, $answer['Authority']);
+        $answer = $this->zarinpal->verify(1000, $answer['Authority']);
         $this->assertEquals($answer['Status'], 'success');
         $this->assertEquals(strlen($answer['Status']), 7);
     }

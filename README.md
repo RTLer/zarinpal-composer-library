@@ -9,14 +9,6 @@ transaction request library for zarinpal
 ## usage
 ### installation
 ``composer require zarinpal/zarinpal``
-or
-```json
-"require": {
-    ...
-    "zarinpal/zarinpal" : "1.2.*",
-    ...
-},
-```
 
 ### request
 ```php
@@ -25,9 +17,28 @@ use Zarinpal\Zarinpal;
 $zarinpal = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
 $zarinpal->enableSandbox(); // active sandbox mod for test env
 // $zarinpal->isZarinGate(); // active zarinGate mode
-echo json_encode($results = $zarinpal->request("example.com/testVerify.php",1000,'testing'));
-if(isset($results['Authority'])) {
-    file_put_contents('Authority',$results['Authority']);
+$results = $zarinpal->request(
+    "example.com/testVerify.php",          //required
+    1000,                                  //required
+    'testing',                             //required
+    'me@example.com',                      //optional
+    '09000000000',                         //optional
+    json_encode([                          //optional
+        "Wages" => [
+            "zp.1.1"'=> [
+                "Amount"'=> 120,
+                "Description"'=> "part 1"
+            ],
+            "zp.2.5"'=> [
+                "Amount"'=> 60,
+                "Description"'=> "part 2"
+            ]
+        ]
+    ])
+);
+echo json_encode($results);
+if (isset($results['Authority'])) {
+    file_put_contents('Authority', $results['Authority']);
     $zarinpal->redirect();
 }
 //it will redirect to zarinpal to do the transaction or fail and just echo the errors.
@@ -67,7 +78,25 @@ now you can access the zarinpal lib like this:
 ```php
 use Zarinpal\Laravel\Facade\Zarinpal;
 
-$results = Zarinpal::request("example.com/testVerify.php",1000,'testing');
+$results = Zarinpal::request(
+    "example.com/testVerify.php",          //required
+    1000,                                  //required
+    'testing',                             //required
+    'me@example.com',                      //optional
+    '09000000000',                         //optional
+    json_encode([                          //optional
+        "Wages" => [
+            "zp.1.1" => [
+                "Amount" => 120,
+                "Description" => "part 1"
+            ],
+            "zp.2.5" => [
+                "Amount" => 60,
+                "Description" => "part 2"
+            ]
+        ]
+    ])
+);
 // save $results['Authority'] for verifying step
 Zarinpal::redirect(); // redirect user to zarinpal
 

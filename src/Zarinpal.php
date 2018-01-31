@@ -30,55 +30,62 @@ class Zarinpal
      * @param string $Description
      * @param string $Email
      * @param string $Mobile
+     * @param null $additionalData
      *
      * @return array|@redirect
      */
-    public function request($callbackURL, $Amount, $Description, $Email = null, $Mobile = null)
+    public function request($callbackURL, $Amount, $Description, $Email = null, $Mobile = null, $additionalData = null)
     {
         $inputs = [
-            'MerchantID'  => $this->merchantID,
+            'MerchantID' => $this->merchantID,
             'CallbackURL' => $callbackURL,
-            'Amount'      => $Amount,
+            'Amount' => $Amount,
             'Description' => $Description,
         ];
-        if (!empty($Email)) {
+        if (!is_null($Email)) {
             $inputs['Email'] = $Email;
         }
-        if (!empty($Mobile)) {
+        if (!is_null($Mobile)) {
             $inputs['Mobile'] = $Mobile;
         }
-        $auth = $this->driver->request($inputs);
-        if (empty($auth['Authority'])) {
-            $auth['Authority'] = null;
-        }
-        $this->Authority = $auth['Authority'];
+        if (!is_null($additionalData)) {
+            $inputs['AdditionalData'] = $additionalData;
+            $results = $this->driver->requestWithExtra($inputs);
+        } else
+            $results = $this->driver->request($inputs);
 
-        return $auth;
+        if (empty($results['Authority'])) {
+            $results['Authority'] = null;
+        }
+        $this->Authority = $results['Authority'];
+
+        return $results;
     }
 
     /**
      * verify that the bill is paid or not
      * by checking authority, amount and status.
      *
-     * @param $status
      * @param $amount
      * @param $authority
      *
      * @return array
      */
-    public function verify($status, $amount, $authority)
+    public function verify($amount, $authority)
     {
-        if ($status == 'OK') {
-            $inputs = [
-                'MerchantID' => $this->merchantID,
-                'Authority'  => $authority,
-                'Amount'     => $amount,
-            ];
-
-            return $this->driver->verify($inputs);
-        } else {
-            return ['Status' => 'canceled'];
+        // backward compatibility
+        if (count(func_get_args()) == 3) {
+            $amount = func_get_arg(1);
+            $authority = func_get_arg(2);
         }
+
+        $inputs = [
+            'MerchantID' => $this->merchantID,
+            'Authority' => $authority,
+            'Amount' => $amount,
+        ];
+
+        return $this->driver->verifyWithExtra($inputs);
     }
 
     public function redirect()
@@ -109,6 +116,6 @@ class Zarinpal
      */
     public function isZarinGate()
     {
-        $this->redirectUrl = $this->redirectUrl."/ZarinGate";
+        $this->redirectUrl = $this->redirectUrl . "/ZarinGate";
     }
 }

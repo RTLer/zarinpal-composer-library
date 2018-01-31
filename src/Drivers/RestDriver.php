@@ -41,7 +41,11 @@ class RestDriver implements DriverInterface
         if ($result['Status'] == 100) {
             return ['Authority' => $result['Authority']];
         } else {
-            return ['error' => $result['Status']];
+            return [
+                'Status' => 'error',
+                'error' => !empty($result['Status'])?$result['Status']:null,
+                'errorInfo' => !empty($result['errors'])?$result['errors']:null,
+            ];
         }
     }
 
@@ -59,7 +63,11 @@ class RestDriver implements DriverInterface
         if ($result['Status'] == 100) {
             return ['Status' => 'success', 'RefID' => $result['RefID']];
         } else {
-            return ['Status' => 'error', 'error' => $result['Status']];
+            return [
+                'Status' => 'error',
+                'error' => !empty($result['Status'])?$result['Status']:null,
+                'errorInfo' => !empty($result['errors'])?$result['errors']:null,
+            ];
         }
     }
 
@@ -77,7 +85,11 @@ class RestDriver implements DriverInterface
         if ($result['Status'] == 100) {
             return ['Status' => 'success', 'RefID' => $result['RefID']];
         } else {
-            return ['Status' => 'error', 'error' => $result['Status']];
+            return [
+                'Status' => 'error',
+                'error' => !empty($result['Status'])?$result['Status']:null,
+                'errorInfo' => !empty($result['errors'])?$result['errors']:null,
+            ];
         }
     }
 
@@ -95,7 +107,11 @@ class RestDriver implements DriverInterface
         if ($result['Status'] == 100) {
             return ['Status' => 'success', 'Authorities' => $result['Authorities']];
         } else {
-            return ['Status' => 'error', 'error' => $result['Status']];
+            return [
+                'Status' => 'error',
+                'error' => !empty($result['Status'])?$result['Status']:null,
+                'errorInfo' => !empty($result['errors'])?$result['errors']:null,
+            ];
         }
     }
 
