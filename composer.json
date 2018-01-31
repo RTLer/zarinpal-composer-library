@@ -1,7 +1,7 @@
 {
     "name": "zarinpal/zarinpal",
     "description": "transaction request system for zarinpal",
-    "license": "GPL2",
+    "license": "GPL-2.0-only",
     "authors": [
         {
             "name": "hooman naghiee",
