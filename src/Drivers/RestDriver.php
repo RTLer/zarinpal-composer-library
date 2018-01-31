@@ -42,9 +42,9 @@ class RestDriver implements DriverInterface
             return ['Authority' => $result['Authority']];
         } else {
             return [
-                'Status' => 'error',
-                'error' => !empty($result['Status'])?$result['Status']:null,
-                'errorInfo' => !empty($result['errors'])?$result['errors']:null,
+                'Status'    => 'error',
+                'error'     => !empty($result['Status']) ? $result['Status'] : null,
+                'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
             ];
         }
     }
@@ -64,9 +64,9 @@ class RestDriver implements DriverInterface
             return ['Status' => 'success', 'RefID' => $result['RefID']];
         } else {
             return [
-                'Status' => 'error',
-                'error' => !empty($result['Status'])?$result['Status']:null,
-                'errorInfo' => !empty($result['errors'])?$result['errors']:null,
+                'Status'    => 'error',
+                'error'     => !empty($result['Status']) ? $result['Status'] : null,
+                'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
             ];
         }
     }
@@ -86,9 +86,9 @@ class RestDriver implements DriverInterface
             return ['Status' => 'success', 'RefID' => $result['RefID']];
         } else {
             return [
-                'Status' => 'error',
-                'error' => !empty($result['Status'])?$result['Status']:null,
-                'errorInfo' => !empty($result['errors'])?$result['errors']:null,
+                'Status'    => 'error',
+                'error'     => !empty($result['Status']) ? $result['Status'] : null,
+                'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
             ];
         }
     }
@@ -108,9 +108,9 @@ class RestDriver implements DriverInterface
             return ['Status' => 'success', 'Authorities' => $result['Authorities']];
         } else {
             return [
-                'Status' => 'error',
-                'error' => !empty($result['Status'])?$result['Status']:null,
-                'errorInfo' => !empty($result['errors'])?$result['errors']:null,
+                'Status'    => 'error',
+                'error'     => !empty($result['Status']) ? $result['Status'] : null,
+                'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
             ];
         }
     }
