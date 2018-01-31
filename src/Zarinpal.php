@@ -30,16 +30,16 @@ class Zarinpal
      * @param string $Description
      * @param string $Email
      * @param string $Mobile
-     * @param null $additionalData
+     * @param null   $additionalData
      *
      * @return array|@redirect
      */
     public function request($callbackURL, $Amount, $Description, $Email = null, $Mobile = null, $additionalData = null)
     {
         $inputs = [
-            'MerchantID' => $this->merchantID,
+            'MerchantID'  => $this->merchantID,
             'CallbackURL' => $callbackURL,
-            'Amount' => $Amount,
+            'Amount'      => $Amount,
             'Description' => $Description,
         ];
         if (!is_null($Email)) {
@@ -51,8 +51,9 @@ class Zarinpal
         if (!is_null($additionalData)) {
             $inputs['AdditionalData'] = $additionalData;
             $results = $this->driver->requestWithExtra($inputs);
-        } else
+        } else {
             $results = $this->driver->request($inputs);
+        }
 
         if (empty($results['Authority'])) {
             $results['Authority'] = null;
@@ -81,8 +82,8 @@ class Zarinpal
 
         $inputs = [
             'MerchantID' => $this->merchantID,
-            'Authority' => $authority,
-            'Amount' => $amount,
+            'Authority'  => $authority,
+            'Amount'     => $amount,
         ];
 
         return $this->driver->verifyWithExtra($inputs);
@@ -116,6 +117,6 @@ class Zarinpal
      */
     public function isZarinGate()
     {
-        $this->redirectUrl = $this->redirectUrl . '/ZarinGate';
+        $this->redirectUrl = $this->redirectUrl.'/ZarinGate';
     }
 }
