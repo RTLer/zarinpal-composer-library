@@ -61,7 +61,15 @@ class RestDriver implements DriverInterface
         $result = $this->restCall('PaymentVerification.json', $inputs);
 
         if ($result['Status'] == 100) {
-            return ['Status' => 'success', 'RefID' => $result['RefID']];
+            return [
+                'Status' => 'success',
+                'RefID' => $result['RefID'],
+            ];
+        } elseif ($result['Status'] == 101) {
+            return [
+                'Status' => 'verified_before',
+                'RefID' => $result['RefID'],
+            ];
         } else {
             return [
                 'Status'    => 'error',
@@ -86,6 +94,12 @@ class RestDriver implements DriverInterface
             return [
                 'Status'      => 'success',
                 'RefID'       => $result['RefID'],
+                'ExtraDetail' => $result['ExtraDetail'],
+            ];
+        } elseif ($result['Status'] == 101) {
+            return [
+                'Status' => 'verified_before',
+                'RefID' => $result['RefID'],
                 'ExtraDetail' => $result['ExtraDetail'],
             ];
         } else {
