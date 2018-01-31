@@ -63,12 +63,12 @@ class RestDriver implements DriverInterface
         if ($result['Status'] == 100) {
             return [
                 'Status' => 'success',
-                'RefID' => $result['RefID'],
+                'RefID'  => $result['RefID'],
             ];
         } elseif ($result['Status'] == 101) {
             return [
                 'Status' => 'verified_before',
-                'RefID' => $result['RefID'],
+                'RefID'  => $result['RefID'],
             ];
         } else {
             return [
@@ -98,8 +98,8 @@ class RestDriver implements DriverInterface
             ];
         } elseif ($result['Status'] == 101) {
             return [
-                'Status' => 'verified_before',
-                'RefID' => $result['RefID'],
+                'Status'      => 'verified_before',
+                'RefID'       => $result['RefID'],
                 'ExtraDetail' => $result['ExtraDetail'],
             ];
         } else {
