@@ -94,6 +94,13 @@ class Zarinpal
         header('Location: '.sprintf($this->redirectUrl, $this->Authority));
         die;
     }
+    /**
+    * @return string
+    */
+    public function redirectUrl()
+    {
+        return sprintf($this->redirectUrl, $this->Authority);
+    }
 
     /**
      * @return DriverInterface
