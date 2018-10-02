@@ -23,7 +23,7 @@ $results = $zarinpal->request(
     'testing',                             //required
     'me@example.com',                      //optional
     '09000000000',                         //optional
-    json_encode([                          //optional
+    [                          //optional
         "Wages" => [
             "zp.1.1"'=> [
                 "Amount"'=> 120,
@@ -34,7 +34,7 @@ $results = $zarinpal->request(
                 "Description"'=> "part 2"
             ]
         ]
-    ])
+    ]
 );
 echo json_encode($results);
 if (isset($results['Authority'])) {
@@ -84,7 +84,7 @@ $results = Zarinpal::request(
     'testing',                             //required
     'me@example.com',                      //optional
     '09000000000',                         //optional
-    json_encode([                          //optional
+    [                          //optional
         "Wages" => [
             "zp.1.1" => [
                 "Amount" => 120,
@@ -95,7 +95,7 @@ $results = Zarinpal::request(
                 "Description" => "part 2"
             ]
         ]
-    ])
+    ]
 );
 // save $results['Authority'] for verifying step
 Zarinpal::redirect(); // redirect user to zarinpal
