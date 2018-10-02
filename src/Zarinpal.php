@@ -94,9 +94,10 @@ class Zarinpal
         header('Location: '.sprintf($this->redirectUrl, $this->Authority));
         die;
     }
+
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function redirectUrl()
     {
         return sprintf($this->redirectUrl, $this->Authority);
