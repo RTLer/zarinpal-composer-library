@@ -20,11 +20,10 @@ class RestDriver implements DriverInterface
     {
         $result = $this->restCall('PaymentRequest.json', $inputs);
 
-        if ($result['Status'] == 100) {
-            return ['Authority' => $result['Authority']];
-        } else {
-            return ['error' => $result['Status']];
-        }
+        return $result['Status'] == 100 ?
+                    ['Authority' => $result['Authority']] :
+                                ['rror' => $result['Status']];
+        
     }
 
     /**
@@ -40,13 +39,13 @@ class RestDriver implements DriverInterface
 
         if ($result['Status'] == 100) {
             return ['Authority' => $result['Authority']];
-        } else {
-            return [
-                'Status'    => 'error',
-                'error'     => !empty($result['Status']) ? $result['Status'] : null,
-                'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
-            ];
-        }
+        }  
+        return [
+            'Status'    => 'error',
+            'error'     => !empty($result['Status']) ? $result['Status'] : null,
+            'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
+        ];
+        
     }
 
     /**
@@ -65,18 +64,20 @@ class RestDriver implements DriverInterface
                 'Status' => 'success',
                 'RefID'  => $result['RefID'],
             ];
-        } elseif ($result['Status'] == 101) {
+        } 
+        if ($result['Status'] == 101) {
             return [
                 'Status' => 'verified_before',
                 'RefID'  => $result['RefID'],
             ];
-        } else {
-            return [
-                'Status'    => 'error',
-                'error'     => !empty($result['Status']) ? $result['Status'] : null,
-                'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
-            ];
-        }
+        } 
+        
+        return [
+            'Status'    => 'error',
+            'error'     => !empty($result['Status']) ? $result['Status'] : null,
+            'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
+        ];
+        
     }
 
     /**
@@ -96,19 +97,21 @@ class RestDriver implements DriverInterface
                 'RefID'       => $result['RefID'],
                 'ExtraDetail' => $result['ExtraDetail'],
             ];
-        } elseif ($result['Status'] == 101) {
+        } 
+        if ($result['Status'] == 101) {
             return [
                 'Status'      => 'verified_before',
                 'RefID'       => $result['RefID'],
                 'ExtraDetail' => $result['ExtraDetail'],
             ];
-        } else {
-            return [
-                'Status'    => 'error',
-                'error'     => !empty($result['Status']) ? $result['Status'] : null,
-                'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
-            ];
-        }
+        } 
+        
+        return [
+            'Status'    => 'error',
+            'error'     => !empty($result['Status']) ? $result['Status'] : null,
+            'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
+        ];
+        
     }
 
     /**
@@ -124,13 +127,12 @@ class RestDriver implements DriverInterface
 
         if ($result['Status'] == 100) {
             return ['Status' => 'success', 'Authorities' => $result['Authorities']];
-        } else {
-            return [
-                'Status'    => 'error',
-                'error'     => !empty($result['Status']) ? $result['Status'] : null,
-                'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
-            ];
-        }
+        } 
+        return [
+            'Status'    => 'error',
+            'error'     => !empty($result['Status']) ? $result['Status'] : null,
+            'errorInfo' => !empty($result['errors']) ? $result['errors'] : null,
+        ];
     }
 
     /**
@@ -146,9 +148,9 @@ class RestDriver implements DriverInterface
 
         if ($result['Status'] == 100) {
             return ['Status' => 'success', 'refreshed' => true];
-        } else {
-            return ['Status' => 'error', 'error' => $result['Status']];
-        }
+        } 
+        return ['Status' => 'error', 'error' => $result['Status']];
+        
     }
 
     /**
@@ -173,9 +175,7 @@ class RestDriver implements DriverInterface
             $body = json_decode($rawBody, true);
         }
 
-        if (!isset($result['Status'])) {
-            $result['Status'] = -99;
-        }
+        $result['Status'] = !isset($result['Status']) ? -99 : $result['Status'];
 
         return $body;
     }
@@ -188,10 +188,12 @@ class RestDriver implements DriverInterface
     public function setAddress($baseUrl)
     {
         $this->baseUrl = $baseUrl;
+        return $this;
     }
 
     public function enableSandbox()
     {
         $this->setAddress('https://sandbox.zarinpal.com/pg/rest/WebGate/');
+        return $this;
     }
 }
