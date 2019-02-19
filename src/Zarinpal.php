@@ -42,22 +42,18 @@ class Zarinpal
             'Amount'      => $Amount,
             'Description' => $Description,
         ];
-        if (!is_null($Email)) {
-            $inputs['Email'] = $Email;
-        }
-        if (!is_null($Mobile)) {
-            $inputs['Mobile'] = $Mobile;
-        }
-        if (!is_null($additionalData)) {
-            $inputs['AdditionalData'] = $additionalData;
-            $results = $this->driver->requestWithExtra($inputs);
-        } else {
-            $results = $this->driver->request($inputs);
-        }
+        
 
-        if (empty($results['Authority'])) {
-            $results['Authority'] = null;
-        }
+        $inputs['Email'] =!is_null($Email) ? $Email :null;
+
+        $inputs['Mobile'] =!is_null($Mobile) ?  $Mobile :null; 
+
+        $inputs['AdditionalData'] =!is_null($additionalData) ?  $additionalData : null ;
+        
+        $results = !is_null($additionalData) ? $this->driver->requestWithExtra($inputs) :$this->driver->request($inputs);
+
+        $results['Authority'] = empty($results['Authority']) ?  null : $results['Authority'];
+
         $this->Authority = $results['Authority'];
 
         return $results;
@@ -92,7 +88,7 @@ class Zarinpal
     public function redirect()
     {
         header('Location: '.sprintf($this->redirectUrl, $this->Authority));
-        die;
+        exit();
     }
 
     /**
