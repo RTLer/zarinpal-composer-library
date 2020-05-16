@@ -7,7 +7,7 @@ use Zarinpal\Drivers\RestDriver;
 
 class Zarinpal
 {
-    private $redirectUrl = 'https://www.zarinpal.com/pg/StartPay/%u';
+    private $redirectUrl = 'https://www.zarinpal.com/pg/StartPay/%s';
     private $merchantID;
     private $driver;
     private $Authority;
