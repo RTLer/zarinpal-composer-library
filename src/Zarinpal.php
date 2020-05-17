@@ -7,7 +7,7 @@ use Zarinpal\Drivers\RestDriver;
 
 class Zarinpal
 {
-    private $redirectUrl = 'https://www.zarinpal.com/pg/StartPay/%u';
+    private $redirectUrl = 'https://www.zarinpal.com/pg/StartPay/%s';
     private $merchantID;
     private $driver;
     private $Authority;
@@ -116,7 +116,7 @@ class Zarinpal
      */
     public function enableSandbox()
     {
-        $this->redirectUrl = 'https://sandbox.zarinpal.com/pg/StartPay/%u';
+        $this->redirectUrl = 'https://sandbox.zarinpal.com/pg/StartPay/%s';
         $this->getDriver()->enableSandbox();
     }
 
