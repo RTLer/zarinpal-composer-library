@@ -1,3 +1,17 @@
+# How to use this fork as zarinpal/zarinpal
+* Fork this repository and add this code to your composer.json
+```
+"repositories": [
+        {
+            "type": "vcs",
+            "url":"https://github.com/<Your_GitHub_Username>/zarinpal-composer-library"
+        }
+    ],
+```
+ * Append `"zarinpal/zarinpal": "dev-master"` to `"require"`
+ * Execute command `composer update`
+ * Generate GitHub Token key (open link that printed in console by composer for token generating)
+ * Enter Token and Done!
 # zarinpal-composer-library 
 [![Build Status](https://travis-ci.org/RTLer/zarinpal-composer-library.svg?branch=master)](https://travis-ci.org/RTLer/zarinpal-composer-library) 
 [![StyleCI](https://styleci.io/repos/37937280/shield)](https://styleci.io/repos/37937280)
